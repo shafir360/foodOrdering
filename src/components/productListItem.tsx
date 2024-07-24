@@ -3,17 +3,25 @@ import { StyleSheet, Text, View , Image} from 'react-native';
 import EditScreenInfo from '@/src/components/EditScreenInfo';
 import {  } from '@/src/components/Themed';
 import Colors from '@/src/constants/Colors';
+import { Product } from '../types';
+
+
+export const defaultPizzaImage = 
+    'https://media.istockphoto.com/id/1489016544/vector/no-pizza-sign-on-white-background.jpg?s=1024x1024&w=is&k=20&c=FDyFXCKkN7HZX1oI7BLVX3eOWeri3S_OjT01_0pzWDI='
+
+
+type ProductListItemProps = {
+    product: Product
+}
 
 
 
-
-
-const ProductListItem = ({ product }) => {
+const ProductListItem = ({ product }: ProductListItemProps) => {
 
   return(
     <View style={styles.container}>
 
-    <Image source={{uri: product.image}} style = {styles.image} /> 
+    <Image source={{uri: product.image || defaultPizzaImage}} style = {styles.image} /> 
     <Text style={styles.title}> {product.name}</Text>
     <Text style = {styles.price}>${product.price}</Text>
     </View>
