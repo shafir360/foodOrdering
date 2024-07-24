@@ -6,15 +6,25 @@ import Colors from '@/src/constants/Colors';
 import products  from '@/assets/data/products';
 
 
-const product = products[0]
 
-export default function TabOneScreen() {
-  return (
+
+const ProuctListItem = ({ product }) => {
+
+  return(
     <View style={styles.container}>
 
-      <Image source={{uri: product.image}} style = {styles.image} /> 
-      <Text style={styles.title}>{product.name}</Text>
-      <Text style = {styles.price}>${product.price}</Text>
+    <Image source={{uri: product.image}} style = {styles.image} /> 
+    <Text style={styles.title}> {product.name}</Text>
+    <Text style = {styles.price}>${product.price}</Text>
+    </View>
+  )
+}
+
+export default function MenuScreen() {
+  return (
+    <View>
+      <ProuctListItem product ={products[3]} />
+      <ProuctListItem product ={products[1]} />
     </View>
   );
 }
