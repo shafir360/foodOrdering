@@ -21,9 +21,6 @@ export default function MenuStack(){
                 </Pressable>
               </Link>
             ),}}/>
-
-
-
         </Stack>
 
     )
