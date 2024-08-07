@@ -3,8 +3,8 @@ import { StyleSheet, Text, View , Image, Pressable} from 'react-native';
 import EditScreenInfo from '@/src/components/EditScreenInfo';
 import {  } from '@/src/components/Themed';
 import Colors from '@/src/constants/Colors';
-import { Product } from '../types';
 import { Link, useSegments } from 'expo-router';
+import { Tables } from '../database.types';
 
 
 export const defaultPizzaImage = 
@@ -12,7 +12,7 @@ export const defaultPizzaImage =
 
 
 type ProductListItemProps = {
-    product: Product
+    product: Tables<'products'>
 }
 
 
