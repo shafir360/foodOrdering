@@ -1,9 +1,8 @@
 import {  Text, View, FlatList, ActivityIndicator } from 'react-native';
 import ProductListItem from '@/src/components/productListItem';
 import { useProductList } from '@/src/api/products';
-
-
-
+import Button from '@/src/components/Button';
+import { supabase } from '@/src/lib/supabase';
 
 export default function MenuScreen() {
 
@@ -18,13 +17,17 @@ export default function MenuScreen() {
   }
 
   return (
-    <FlatList 
-      data = {products} 
-      renderItem={({ item }) => <ProductListItem product ={item} />}
-      numColumns={2}
-      contentContainerStyle = {{gap: 10, padding: 10}}
-      columnWrapperStyle = {{gap: 10}}
-    />
+    <View>
+      <FlatList 
+        data = {products} 
+        renderItem={({ item }) => <ProductListItem product ={item} />}
+        numColumns={2}
+        contentContainerStyle = {{gap: 10, padding: 10}}
+        columnWrapperStyle = {{gap: 10}}
+      />
+      <Button onPress ={()=>supabase.auth.signOut()} text = {"Sign Out"} />
+    </View>
+    
   );
 }
 

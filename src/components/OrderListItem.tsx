@@ -4,24 +4,24 @@ import { Order } from '../types';
 import { Link, useSegments } from 'expo-router';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
+import { Tables } from '../database.types';
 
 dayjs.extend(relativeTime);
 
 type OrderListItemProps = {
-    order: Order
-    index: number
+    order: Tables<'orders'>
 };
 
-const OrderListItem = ({order,index} :OrderListItemProps ) => {
+const OrderListItem = ({order} :OrderListItemProps ) => {
 
     const segments = useSegments()
 
     return (
-        <Link href={`/${segments[0]}/orders/${order.id}?index=${index}`} asChild>
+        <Link href={`/${segments[0]}/orders/${order.id}`} asChild>
             <Pressable>
                 <View style = {styles.parentContainer}>
                     <View>
-                        <Text style={styles.orderNumText}>Order #{index}</Text>
+                        <Text style={styles.orderNumText}>Order #{order.id}</Text>
                         <Text style={styles.timeText}>{dayjs(order.created_at).fromNow()}</Text>
                     </View>
                     <Text style={styles.statusText}>{order.status}</Text>
