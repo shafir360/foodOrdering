@@ -7,17 +7,23 @@ import { OrderItem } from '@/src/types';
 import OrderItemListItem from '@/src/components/OrderItemListItem';
 import { OrderStatusList } from '@/src/types';
 import Colors from '@/src/constants/Colors';
-import { useOrderDetails } from '@/src/api/orders';
+import { useOrderDetails, useUpdateOrder } from '@/src/api/orders';
 
 
 const orderScreenDetail = () => {
 
   const {id: idString,index} = useLocalSearchParams()
   const id = parseFloat(typeof idString == 'string' ? idString : idString[0])
+  const {mutate:updateOrder} = useUpdateOrder()
   
   //const order = orders.find((o) => o.id.toString() === id);
 
   const {data: order,isLoading,error} = useOrderDetails(id)
+
+
+  const updateStatus = (status) => {
+    updateOrder({id:id, updatedFields:{status}} )
+  }
 
   
   if(isLoading){
@@ -31,7 +37,8 @@ const orderScreenDetail = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Order #{index}</Text>
+      <Text style={styles.title}>Order #{order?.id}</Text>
+      <Text style={styles.title}>Order #{order?.status}</Text>
       <FlatList
         data={order.order_items}
         renderItem={({ item }) => <OrderItemListItem item={item} />}
@@ -43,7 +50,7 @@ const orderScreenDetail = () => {
         {OrderStatusList.map((status) => (
           <Pressable
             key={status}
-            onPress={() => console.warn('Update status')}
+            onPress={() => updateStatus(status)}
             style={{
               borderColor: Colors.light.tint,
               borderWidth: 1,
